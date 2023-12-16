@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sist>
+	<stu name="lee">
+		<java>88</java>
+		<oracle>77</oracle>
+		<ajax>99</ajax>
+	</stu>
+	
+	<stu name="kim">
+		<java>77</java>
+		<oracle>66</oracle>
+		<ajax>88</ajax>
+	</stu>
+	
+	<stu name="park">
+		<java>88</java>
+		<oracle>99</oracle>
+		<ajax>66</ajax>
+	</stu>
+</sist>

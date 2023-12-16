@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Moirai+One&family=Nanum+Pen+Script&family=Orbit&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<title>Insert title here</title>
+<style>
+	body *{
+		font-family: 'Nanum Pen Script';
+		font-size: 30px;
+	}
+</style>
+</head>
+<body>
+<button type="button" class="btn btn-success" id="btn1">quiz.xml</button>
+<button type="button" class="btn btn-success" id="btn2">quiz.json</button>
+<br><br>
+<div id="result">출력</div>
+
+<script type="text/javascript">
+$("#btn1").click(function(){
+	
+	$("#result").empty();
+	var s="";
+	$.ajax({
+		
+		type:"get",
+		url:"quiz.xml",
+		dataType:"xml",
+		success:function(quiz){
+			
+			$(quiz).find("sawon").each(function(idx,ele){
+				
+				var e=$(ele);
+				
+				s+="<div class='alert alert-success'>";
+				s+="No: "+e.attr("no")+"<br>";
+				s+="Buseo: "+e.find("buseo").text()+"<br>";
+				s+="Pay: "+e.find("pay").text()+"원<br>";
+				s+="Sudang: "+e.find("pay").attr("sudang")+"원<br>";
+				s+="</div>";
+			
+				
+			
+			});
+			$("#result").append(s);
+		}
+		
+	});
+	
+});
+
+$("#btn2").click(function(){
+	
+	$("#result").empty();
+	var s="";
+	$.ajax({
+		
+		type:"get",
+		url:"quiz.json",
+		dataType:"json",
+		success:function(quiz){
+			
+			$.each(quiz,function(idx,ele){
+				
+				s+="<div class='alert alert-success'>";
+				s+="No: "+(idx+1)+"<br>";
+				s+="Name: "+ele.name+"<br>";
+				s+="Hobby: ";
+				
+				if(ele.hobby==null)
+				s+="취미없음<br>";
+				else{
+					$.each(ele.hobby,function(i,h){
+						s+="["+h+"]";
+					});
+					
+					s+="<br>";
+				}
+				
+				s+="Addr: "+ele.addr+"<br>";
+				s+="Hp: "+(ele.hp==null?"번호없음":ele.hp)+"<br>";
+				s+="</div>";
+				
+				
+			})
+			$("#result").append(s);
+		}
+	});
+});
+</script>
+</body>
+</html>
